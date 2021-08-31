@@ -16,24 +16,29 @@ import org.springframework.beans.factory.config.InstantiationAwareBeanPostProces
 public class MyInstantiationAwareBeanPostProcessor extends InstantiationAwareBeanPostProcessorAdapter {
 
     public MyInstantiationAwareBeanPostProcessor() {
-        System.out.println("执行【InstantiationAwareBeanPostProcessor】的 MyInstantiationAwareBeanPostProcessor 类构造方法");
+        System.out.println("执行【InstantiationAwareBeanPostProcessor】 的 实现类 MyInstantiationAwareBeanPostProcessor 类构造方法  ====> 实例化");
     }
 
     /**
-     * 实例话bean之前调用
+     * 实例化bean之前调用
+     * 直接返回一个对象（例如代理对象）
+     *
+     * 作用：代替内置的实例化创建对象流程
      */
     @Override
     public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
-        System.out.println("执行【InstantiationAwareBeanPostProcessor】的 postProcessBeforeInstantiation 方法");
+        System.out.println("执行【InstantiationAwareBeanPostProcessor】的 postProcessBeforeInstantiation 方法  ========> 执行实例化前置操作");
         return super.postProcessBeforeInstantiation(beanClass, beanName);
     }
 
     /**
-     * 实例话bean之后调用
+     * 实例化bean之后调用
+     *
+     * 若返回false 则会对指定的bean不进行自动依赖注入
      */
     @Override
     public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
-        System.out.println("执行【InstantiationAwareBeanPostProcessor】的 postProcessAfterInstantiation 方法");
+        System.out.println("执行【InstantiationAwareBeanPostProcessor】的 postProcessAfterInstantiation 方法  ========> 执行实例化后置操作");
         return super.postProcessAfterInstantiation(bean, beanName);
     }
 
@@ -42,7 +47,7 @@ public class MyInstantiationAwareBeanPostProcessor extends InstantiationAwareBea
      */
     @Override
     public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {
-        System.out.println("执行【InstantiationAwareBeanPostProcessor】的 postProcessProperties 方法 设置属性");
+        System.out.println("执行【InstantiationAwareBeanPostProcessor】 的 实现类 postProcessProperties 方法 设置属性");
         return super.postProcessProperties(pvs, bean, beanName);
     }
 }

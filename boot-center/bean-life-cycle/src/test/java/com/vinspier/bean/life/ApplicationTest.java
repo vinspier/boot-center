@@ -19,7 +19,7 @@ public class ApplicationTest {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         System.out.println("初始化容器结束");
         Person person = context.getBean(Person.class);
-        System.out.println(JSONObject.toJSONString(person));
+        System.out.println("使用数据：" + JSONObject.toJSONString(person));
         System.out.println("开始关闭容器");
         context.registerShutdownHook();
 

@@ -1,5 +1,6 @@
 package com.vinspier.bean.life.domain;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
 
@@ -24,7 +25,7 @@ public class Person implements BeanFactoryAware, BeanNameAware, InitializingBean
     private String beanName;
 
     public Person() {
-        System.out.println("执行【实例对像的】无参构造器");
+        System.out.println("执行【实例对像的】无参构造器  ====> 实例化");
     }
 
     public String getName() {
@@ -56,8 +57,10 @@ public class Person implements BeanFactoryAware, BeanNameAware, InitializingBean
      * */
     @PostConstruct
     public void selfInit(){
+        System.out.println("执行 【bean本身】 的 selfInit 初始化方法");
         this.name = "vinspier";
-        this.age = 26;
+        this.age = 4000;
+        System.out.println("        " + this.toString());
     }
 
     /**
@@ -65,7 +68,7 @@ public class Person implements BeanFactoryAware, BeanNameAware, InitializingBean
      * */
     @PreDestroy
     public void selfDestroy(){
-        System.out.println("执行 bean本省 的 selfDestroy 销毁方法");
+        System.out.println("执行 【bean本身】 的 selfDestroy 销毁方法");
     }
 
     /**
@@ -73,7 +76,7 @@ public class Person implements BeanFactoryAware, BeanNameAware, InitializingBean
      */
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        System.out.println("执行【BeanFactoryAware】的 setBeanFactory 方法");
+        System.out.println("执行【BeanFactoryAware】 的 实现类 setBeanFactory 方法");
         this.beanFactory = beanFactory;
     }
 
@@ -82,7 +85,7 @@ public class Person implements BeanFactoryAware, BeanNameAware, InitializingBean
      */
     @Override
     public void setBeanName(String beanName) {
-        System.out.println("执行【BeanNameAware】的 setBeanName 方法");
+        System.out.println("执行【BeanNameAware】 的 实现类 setBeanName 方法");
         this.beanName = beanName;
     }
 
@@ -91,7 +94,11 @@ public class Person implements BeanFactoryAware, BeanNameAware, InitializingBean
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println("执行【InitializingBean】的 afterPropertiesSet 方法");
+        System.out.println("执行【InitializingBean】 的 实现类 afterPropertiesSet 方法");
+        // ---- 通过工厂 拿到对应的bean 对其做相应的逻辑操作
+        Person person = beanFactory.getBean(Person.class);
+        person.setAge(3000);
+        System.out.println("        " + JSONObject.toJSONString(person));
     }
 
     /**
@@ -99,6 +106,15 @@ public class Person implements BeanFactoryAware, BeanNameAware, InitializingBean
      */
     @Override
     public void destroy() throws Exception {
-        System.out.println("执行【DisposableBean】的 destroy 方法");
+        System.out.println("执行【DisposableBean】 的 实现类 destroy 方法");
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", beanName='" + beanName + '\'' +
+                '}';
     }
 }
