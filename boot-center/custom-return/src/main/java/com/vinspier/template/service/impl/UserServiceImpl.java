@@ -1,9 +1,10 @@
-package com.vinspier.template.service;
+package com.vinspier.template.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.vinspier.template.mapper.UserMapper;
 import com.vinspier.template.pojo.User;
+import com.vinspier.template.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
