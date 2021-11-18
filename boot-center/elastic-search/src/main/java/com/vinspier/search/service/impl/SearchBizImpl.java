@@ -3,9 +3,12 @@ package com.vinspier.search.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.google.common.collect.Lists;
 import com.vinspier.search.convert.UserConvert;
+import com.vinspier.search.dao.GoodsService;
 import com.vinspier.search.dao.UserRepository;
 import com.vinspier.search.dao.UserService;
+import com.vinspier.search.model.doc.GoodsDoc;
 import com.vinspier.search.model.doc.UserDoc;
+import com.vinspier.search.model.po.Goods;
 import com.vinspier.search.model.po.User;
 import com.vinspier.search.service.SearchBiz;
 import com.vinspier.search.service.UserBiz;
@@ -30,7 +33,7 @@ public class SearchBizImpl implements SearchBiz {
     private UserRepository userRepository;
 
     @Autowired
-    private UserBiz userBiz;
+    private GoodsService goodsService;
 
     @Autowired
     private UserService userService;
@@ -61,5 +64,15 @@ public class SearchBizImpl implements SearchBiz {
         userRepository.saveAll(userDocList);
 
         return userDocList;
+    }
+
+    @Override
+    public List<GoodsDoc> saveGoodsDocs(List<Integer> goodsIds) {
+        List<Goods> goodsList = goodsService.listByIds(goodsIds);
+        if (CollectionUtils.isEmpty(goodsList)){
+            return Lists.newArrayList();
+        }
+
+        return null;
     }
 }

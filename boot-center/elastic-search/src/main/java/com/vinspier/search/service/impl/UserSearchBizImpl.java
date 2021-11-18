@@ -29,7 +29,7 @@ public class UserSearchBizImpl implements UserSearchBiz {
         CriteriaQuery criteriaQuery = new CriteriaQuery(
                 new Criteria()
                 .and(new Criteria("username").contains(param.getUsername()))
-//                .and(new Criteria("age").is(param.getAge()))
+                .and(new Criteria("age").is(param.getAge()))
 //                .and(new Criteria("age").between(param.getAgeMin(),param.getAgeMax())
                 .and(new Criteria("age").greaterThanEqual(param.getAgeMin()))
                 .and(new Criteria("age").lessThanEqual(param.getAgeMax()))

@@ -1,5 +1,6 @@
 package com.vinspier.search.service;
 
+import com.vinspier.search.model.doc.GoodsDoc;
 import com.vinspier.search.model.doc.UserDoc;
 
 import java.util.List;
@@ -27,4 +28,6 @@ public interface SearchBiz {
     UserDoc saveUser(Integer userId);
 
     List<UserDoc> initUsers(List<Integer> userIds);
+
+    List<GoodsDoc> saveGoodsDocs(List<Integer> goodsIds);
 }
