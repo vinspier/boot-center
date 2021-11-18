@@ -1,6 +1,8 @@
 package com.vinspier.search.service;
 
+import com.vinspier.search.model.param.GoodsParam;
 import com.vinspier.search.model.param.UserParam;
+import com.vinspier.search.model.po.Goods;
 import com.vinspier.search.model.po.User;
 
 import java.util.List;
@@ -8,8 +10,8 @@ import java.util.List;
 public interface GoodsBiz {
 
     /**
-     * 查询用户列表
+     * 查询商品列表
      * */
-    List<User> queryList(UserParam param);
+    List<Goods> queryList(GoodsParam param);
 
 }

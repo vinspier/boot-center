@@ -17,7 +17,7 @@ public class Goods {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private String goodsTitle;
+    private String goodTitle;
 
     private Integer categoryId;
 

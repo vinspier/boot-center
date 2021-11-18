@@ -1,6 +1,7 @@
 package com.vinspier.search.controller;
 
 import com.vinspier.search.common.ResponseTemplate;
+import com.vinspier.search.model.doc.GoodsDoc;
 import com.vinspier.search.model.doc.UserDoc;
 import com.vinspier.search.service.SearchBiz;
 import io.swagger.annotations.Api;
@@ -34,6 +35,12 @@ public class SearchController {
     public ResponseTemplate<List<UserDoc>> initUsers(@RequestBody List<Integer> userIds){
 
         return ResponseTemplate.ok(searchBiz.initUsers(userIds));
+    }
+
+    @PostMapping("/initGoods")
+    public ResponseTemplate<List<GoodsDoc>> initGoods(@RequestBody List<Integer> goodsIds){
+
+        return ResponseTemplate.ok(searchBiz.saveGoodsDocs(goodsIds));
     }
 
 }

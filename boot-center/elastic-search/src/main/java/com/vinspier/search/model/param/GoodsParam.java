@@ -5,9 +5,11 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class goodsParam {
+public class GoodsParam {
 
     private Integer id;
+
+    private String name;
 
     private String goodsTitle;
 

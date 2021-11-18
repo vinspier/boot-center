@@ -20,8 +20,25 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@Document(indexName = "itemGoods",shards = 1,replicas = 1)
+@Document(indexName = "item_goods",shards = 1,replicas = 1)
 public class GoodsDoc {
+
+    public static final String ID = "id";
+    public static final String NAME = "name";
+    public static final String ROOT_CID = "rootCid";
+    public static final String SEC_CID = "secCid";
+    public static final String LEAF_CID = "leafCid";
+    public static final String TYPE = "type";
+    public static final String AR_TRANSLATE = "arTranslate";
+    public static final String SUPPLIER_ID = "supplierId";
+    public static final String OPEN_DIRECTION = "openDirection";
+    public static final String SHELF_AT = "shelfAt";
+    public static final String SKU_IDS = "skuIds";
+    public static final String SEASON = "season";
+    public static final String SITE_ME = "siteMe";
+    public static final String SITE_EA = "siteEa";
+    public static final String SITE_SA = "siteSa";
+    public static final String SITE_SE = "siteSe";
 
     /**
      * 商品ID
@@ -32,7 +49,7 @@ public class GoodsDoc {
     /**
      * 商品名称
      * */
-    @Field(type = FieldType.Keyword)
+    @Field(type = FieldType.Text,analyzer = "ik_max_word")
     private String name;
 
     /**

@@ -20,9 +20,10 @@ public class GoodsConvert {
 
     }
 
-    public GoodsDoc convertPOtoDoc(Goods goods){
+    public static GoodsDoc convertPOtoDoc(Goods goods){
         GoodsDoc goodsDoc = new GoodsDoc();
         goodsDoc.setId(goods.getId());
+        goodsDoc.setName(goods.getGoodTitle());
         parseCategoryPath(goods.getCategoryPath(),goodsDoc);
         goodsDoc.setType(goods.getStockType());
         goodsDoc.setArTranslate(null);
@@ -40,7 +41,7 @@ public class GoodsConvert {
 
     }
 
-    public List<GoodsDoc> convertPOListToDocList(List<Goods> goodsList){
+    public static List<GoodsDoc> convertPOListToDocList(List<Goods> goodsList){
         List<GoodsDoc> goodsDocList = new ArrayList<>(goodsList.size());
         goodsList.forEach(item -> {
             goodsDocList.add(convertPOtoDoc(item));

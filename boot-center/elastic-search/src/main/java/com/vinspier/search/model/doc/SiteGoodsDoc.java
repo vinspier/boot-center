@@ -20,7 +20,7 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@Document(indexName = "itemSiteGoods",shards = 1,replicas = 1)
+@Document(indexName = "item_site_goods",shards = 1,replicas = 1)
 public class SiteGoodsDoc {
 
     /**
@@ -38,7 +38,7 @@ public class SiteGoodsDoc {
     /**
      * 商品名称
      * */
-    @Field(type = FieldType.Keyword)
+    @Field(type = FieldType.Text,analyzer = "ik_max_word")
     private String name;
 
     /**

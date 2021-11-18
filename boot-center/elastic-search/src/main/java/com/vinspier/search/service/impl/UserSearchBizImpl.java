@@ -1,5 +1,6 @@
 package com.vinspier.search.service.impl;
 
+import com.vinspier.search.dao.UserRepository;
 import com.vinspier.search.model.doc.UserDoc;
 import com.vinspier.search.model.param.UserParam;
 import com.vinspier.search.service.UserSearchBiz;
@@ -19,6 +20,9 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class UserSearchBizImpl implements UserSearchBiz {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private ElasticsearchRestTemplate elasticsearchRestTemplate;
