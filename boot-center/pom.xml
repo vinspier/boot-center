@@ -8,6 +8,7 @@
         <module>custom-return</module>
         <module>bean-life-cycle</module>
         <module>elastic-search</module>
+        <module>mybatis-generate</module>
     </modules>
 
     <parent>
@@ -38,7 +39,7 @@
         <knife4j-spring>1.9.6</knife4j-spring>
         <google-guava>26.0-jre</google-guava>
         <swagger.annotations.version>1.5.13</swagger.annotations.version>
-        <mybatis.plus.boot.starter.version>3.3.0</mybatis.plus.boot.starter.version>
+        <mybatis.plus.boot.starter.version>3.4.0</mybatis.plus.boot.starter.version>
 
     </properties>
 
