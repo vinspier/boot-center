@@ -107,6 +107,12 @@ public class GoodsDoc {
     private List<Integer> skuIds;
 
     /**
+     * sku集合
+     */
+    @Field(type = FieldType.Object)
+    private List<GoodSkuDoc> skuDocList;
+
+    /**
      * 季节 0春 1夏 2秋 3冬 4四季
      */
     @Field(type = FieldType.Integer)
