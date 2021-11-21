@@ -1,22 +1,18 @@
 package com.vinspier.mybatis.generate;
 
 
-import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
-
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.builder.ConfigBuilder;
-import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
-import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.vinspier.mybatis.config.DatasourceConfig;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 /**
  * 代码生策启动类
  *
@@ -25,21 +21,13 @@ import java.util.Properties;
 */
 public class MyBatisPlusGenerator {
 
-    /**  数据链接配置 */
-    private static String jdbc_drivername="com.mysql.cj.jdbc.Driver";
-    private static String ip_port= "localhost:3306/";
-    private static String database = "test";
-    private static String jdbc_connectionURL="jdbc:mysql://" + ip_port + database + "?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
-    private static String jdbc_username="root";
-    private static String jdbc_password="Root@123";
-
     private static String parterPackage="com.vinspier.mybatis.";//自定义包名
     private static String xmlMapper = "mappers";//生成resource目录下存放mapperxml的文件夹名
 
-    public static void main(String[] args) throws IOException, NoSuchFieldException, IllegalAccessException {
+    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
         AutoGenerator mpg = new AutoGenerator();
 
-        String[] generateTables = new String[]{"goods","good_skus"};
+        String[] generateTables = new String[]{"goods","goods_attr_value","good_size_chart","website_goods_status","country_good_price","country_sku_price","product_languages"};
 
         String Author = "xiaobiao.fan";//开发者
         //全局配置
@@ -58,31 +46,10 @@ public class MyBatisPlusGenerator {
         gc.setAuthor(Author);
 
         gc.setServiceName("%sService");
-//        gc.setMapperName("%sMapper");
-//        gc.setXmlName("%sXml");
-//        gc.setControllerName("s%Controller");
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
-        DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setDbType(DbType.MYSQL);
-
-        //自定义类型转换
-        dsc.setTypeConvert(new MySqlTypeConvert() {
-            @Override
-            public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
-                return super.processTypeConvert(globalConfig, fieldType);
-            }
-        });
-
-        //数据库配置
-        Properties prop = new Properties();
-//        InputStream in = new MyBatisPlusGenerator().getClass().getResourceAsStream("/generator.properties");
-//        prop.load(in);
-        dsc.setDriverName(jdbc_drivername);
-        dsc.setUsername(jdbc_username);
-        dsc.setPassword(jdbc_password);
-        dsc.setUrl(jdbc_connectionURL);
+        DataSourceConfig dsc = DatasourceConfig.getDscTest();
         mpg.setDataSource(dsc);
 
         for (String table : generateTables){
@@ -102,7 +69,9 @@ public class MyBatisPlusGenerator {
 
             //setExclude setInclude 属性需要设置为false
             strategy.setEnableSqlFilter(false);
-            strategy.setExclude("^((?!" + table +").)*$");
+//            strategy.setExclude("^((?!" + table +").)*$");
+//            strategy.setExclude("^" + table +"$");
+            strategy.setInclude("^" + table +"$");
             mpg.setStrategy(strategy);
 
             // 包配置
