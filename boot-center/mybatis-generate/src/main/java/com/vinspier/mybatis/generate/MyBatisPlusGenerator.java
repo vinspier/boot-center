@@ -27,13 +27,13 @@ public class MyBatisPlusGenerator {
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
         AutoGenerator mpg = new AutoGenerator();
 
-        String[] generateTables = new String[]{"goods","goods_attr_value","good_size_chart","website_goods_status","country_good_price","country_sku_price","product_languages"};
+//        String[] generateTables = new String[]{"goods","goods_attr_value","good_size_chart","website_goods_status","country_good_price","country_sku_price","product_languages"};
+        String[] generateTables = new String[]{"good_onoffline_log"};
 
         String Author = "xiaobiao.fan";//开发者
         //全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-
         projectPath += "/mybatis-generate/";
 
         gc.setFileOverride(true);
@@ -41,11 +41,11 @@ public class MyBatisPlusGenerator {
         gc.setActiveRecord(false);
         gc.setBaseResultMap(true);
         gc.setBaseColumnList(true);
-
+        // 输出文件路径
         gc.setOutputDir(projectPath);
         gc.setAuthor(Author);
+        gc.setServiceName("%sDao");
 
-        gc.setServiceName("%sService");
         mpg.setGlobalConfig(gc);
 
         // 数据源配置

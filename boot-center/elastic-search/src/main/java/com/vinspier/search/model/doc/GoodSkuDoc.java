@@ -17,7 +17,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@Document(indexName = "item_goods_sku")
+@Document(indexName = "backend_item_sku")
 public class GoodSkuDoc {
 
     public static final String ID = "id";

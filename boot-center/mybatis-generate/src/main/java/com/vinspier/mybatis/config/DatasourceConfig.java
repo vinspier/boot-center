@@ -47,11 +47,6 @@ public class DatasourceConfig {
             }
         });
 
-        DSC_TEST.setDriverName(jdbc_drivername1);
-        DSC_TEST.setUsername(jdbc_username1);
-        DSC_TEST.setPassword(jdbc_password1);
-        DSC_TEST.setUrl(jdbc_connectionURL1);
-
         return DSC_TEST;
     }
 
@@ -63,13 +58,5 @@ public class DatasourceConfig {
     private static String jdbc_username = "root";
     private static String jdbc_password = "Root@123";
 
-
-    /**  测试数据链接配置 */
-    private static String jdbc_drivername1 = "com.mysql.cj.jdbc.Driver";
-    private static String ip_port1 = "rm-bp17p5leh1mitgwbyno.mysql.rds.aliyuncs.com:3306/";
-    private static String database1 = "hibobi";
-    private static String jdbc_connectionURL1 = "jdbc:mysql://" + ip_port1 + database1 + "?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
-    private static String jdbc_username1 = "hibobi";
-    private static String jdbc_password1 = "hibobi*#@123";
 
 }

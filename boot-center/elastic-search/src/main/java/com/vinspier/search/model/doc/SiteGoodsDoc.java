@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -20,13 +21,18 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@Document(indexName = "item_site_goods",shards = 1,replicas = 1)
+@Document(indexName = "backend_item_site_goods",shards = 1,replicas = 1)
 public class SiteGoodsDoc {
+
+    /**
+     * 文档ID(siteID + id)
+     * */
+    @Id
+    private String docId;
 
     /**
      * 商品ID
      * */
-    @Id
     private Integer id;
 
     /**
@@ -63,7 +69,7 @@ public class SiteGoodsDoc {
      * 商品类型 1 普通款 2 清仓款 3淘汰款 4断货款 5赠品
      */
     @Field(type = FieldType.Integer)
-    private Integer type;
+    private Integer stockType;
 
     /**
      * 0待上架 1上架 2下架
@@ -87,30 +93,35 @@ public class SiteGoodsDoc {
      * 开款方向 1婴儿，2小童，3中大童
      */
     @Field(type = FieldType.Integer)
-    private Integer openDirection;
+    private Integer openingDirection;
 
     /**
      * 上架时间
      */
-    @Field(type = FieldType.Date)
+    @Field(type = FieldType.Date,format = DateFormat.date_hour_minute_second)
     private Date shelfAt;
 
     /**
      * skuId集合
      */
     @Field(type = FieldType.Integer)
-    private List<Integer> skuIds;
+    private List<GoodSkuDoc> skus;
 
     /**
      * 季节 0春 1夏 2秋 3冬 4四季
      */
     @Field(type = FieldType.Integer)
-    private Integer season;
+    private List<Integer> season;
 
     /**
      * 信息变更标签 1 供货价修改 2 图片修改
      */
     @Field(type = FieldType.Integer)
     private Integer infoChangeType;
+
+    /**
+     * 关联语言
+     * */
+    private List<ItemLanguageDoc> languages;
 
 }

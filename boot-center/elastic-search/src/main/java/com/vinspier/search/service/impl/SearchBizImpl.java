@@ -89,7 +89,7 @@ public class SearchBizImpl implements SearchBiz {
         List<GoodSkus> skusList = goodSkusService.queryList(param);
         Map<Integer,List<GoodSkus>> skuMap = skusList.stream().collect(Collectors.groupingBy(GoodSkus::getGoodId));
         goodsDocList.forEach(item -> {
-            item.setSkuDocList(GoodSkusConvert.convertPOListToDocList(skuMap.get(item.getId())));
+            item.setSkus(GoodSkusConvert.convertPOListToDocList(skuMap.get(item.getId())));
         });
         goodsRepository.saveAll(goodsDocList);
 
