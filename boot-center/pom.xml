@@ -9,6 +9,7 @@
         <module>bean-life-cycle</module>
         <module>elastic-search</module>
         <module>mybatis-generate</module>
+        <module>mq-rabbit</module>
     </modules>
 
     <parent>

@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: mq-rabbit
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        acknowledge-mode: manual
+        concurrency: 1
+        max-concurrency: 5
+    template:
+      retry:
+        enabled: true
+        max-attempts: 3
+    connection-timeout: 10000
+
+
