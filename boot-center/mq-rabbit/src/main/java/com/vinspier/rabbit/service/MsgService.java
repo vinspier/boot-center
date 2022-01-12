@@ -7,4 +7,6 @@ public interface MsgService {
     void sendMsg(MsgDTO msgDTO);
 
     void send(MsgDTO msgDTO,String exchange,String routeKey);
+
+    void send(MsgDTO msgDTO,String exchange,String routeKey,int timeToLive);
 }

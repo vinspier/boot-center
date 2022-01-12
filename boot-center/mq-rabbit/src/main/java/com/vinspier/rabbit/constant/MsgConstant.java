@@ -12,6 +12,16 @@ public interface MsgConstant {
     String VINSPIER_EXCHANGE = "vinspier_exchange";
 
     /**
+     * 延时交换机
+     * */
+    String VINSPIER_DELAY_EXCHANGE = "vinspier_delay_exchange";
+
+    /**
+     * 私信交换机
+     * */
+    String VINSPIER_DEAD_EXCHANGE = "vinspier_dead_exchange";
+
+    /**
      * 队列
      * */
     String DEV_QUEUE = "dev_queue";

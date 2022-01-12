@@ -1,6 +1,7 @@
 package com.vinspier.rabbit.biz.impl;
 
 import com.vinspier.rabbit.biz.MsgBiz;
+import com.vinspier.rabbit.constant.MsgConstant;
 import com.vinspier.rabbit.domain.dto.MsgDTO;
 import com.vinspier.rabbit.service.MsgService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,11 @@ public class MsgBizImpl implements MsgBiz {
 //                .content("实际业务内容")
 //                .build();
         msgService.sendMsg(msgDTO);
+    }
+
+    @Override
+    public void delayMsg(MsgDTO msgDTO, int timeToLive) {
+        msgService.send(msgDTO, MsgConstant.VINSPIER_DELAY_EXCHANGE,MsgConstant.DELAY_EVENT,timeToLive);
     }
 
 }

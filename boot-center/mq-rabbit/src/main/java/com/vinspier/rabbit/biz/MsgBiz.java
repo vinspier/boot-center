@@ -13,4 +13,10 @@ public interface MsgBiz {
      * */
     void normalMsg(MsgDTO msgDTO);
 
+    /**
+     * 延时队列
+     * 使用插件形式
+     * */
+    void delayMsg(MsgDTO msgDTO,int timeToLive);
+
 }

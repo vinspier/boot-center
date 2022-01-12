@@ -35,4 +35,17 @@ public class MsgServiceImpl implements MsgService {
         }
     }
 
+    @Override
+    public void send(MsgDTO msgDTO, String exchange, String routeKey, int timeToLive) {
+        try {
+            rabbitTemplate.convertAndSend(exchange,routeKey,msgDTO,message -> {
+                message.getMessageProperties().setDelay(timeToLive);
+                return message;
+            });
+            log.info("[send msg succeed],msg body =[{}]", JSONObject.toJSONString(msgDTO));
+        } catch (AmqpException e) {
+            log.info("[send msg failed],msg body =[{}],error msg ={}", JSONObject.toJSONString(msgDTO),e.getMessage(),e);
+        }
+    }
+
 }

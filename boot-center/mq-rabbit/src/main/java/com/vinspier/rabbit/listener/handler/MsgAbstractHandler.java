@@ -25,7 +25,7 @@ public abstract class MsgAbstractHandler implements MsgHandler {
     /**
      * 转换 业务实体
      * */
-    protected <T> T convertMsgDTO(Message message,Class<T> clazz) {
+    protected <T> T convertMsgDTO(Message message) {
         T resultDTO;
         try {
             resultDTO = (T) converter.fromMessage(message);
@@ -40,12 +40,13 @@ public abstract class MsgAbstractHandler implements MsgHandler {
     /**
      * 消息处理流程编排
      * */
-    protected  <T, V> V handle(Message message, Channel channel, Class<T> clazz, Callable<V> callable,int retryTimes) {
-        T dto = convertMsgDTO(message,clazz);
+    protected  <T, V> V handle(Message message, Channel channel, Callable<V> callable,int retryTimes) {
+        T dto = convertMsgDTO(message);
         preHandle(dto);
         V result = execute(callable,retryTimes);
         afterHandle(message,channel);
-        ack(message,channel);
+        // ack这个动作 应该在处理消息返回结果后 业务自行判断 ack、nack、reject
+//        ack(message,channel);
 
         return result;
     }
@@ -54,8 +55,8 @@ public abstract class MsgAbstractHandler implements MsgHandler {
      * 消息处理流程编排
      * */
     @Override
-    public <T, V> V handle(Message message, Channel channel, Class<T> clazz, Callable<V> callable) {
-        return handle(message,channel,clazz,callable,defaultRetry);
+    public <T, V> V handle(Message message, Channel channel, Callable<V> callable) {
+        return handle(message,channel,callable,defaultRetry);
     }
 
     /**
@@ -88,18 +89,42 @@ public abstract class MsgAbstractHandler implements MsgHandler {
      * 后置处理
      * */
     protected <V> void afterHandle(Message message,Channel channel){
-
+        log.info("--------> [after handle msg]");
     }
 
     /**
-     * 后置ack
+     * ack
      * */
-    protected <V> void ack(Message message,Channel channel){
+    protected void ack(Message message,Channel channel){
         try {
             // ack消息
             channel.basicAck(message.getMessageProperties().getDeliveryTag(),true);
         } catch (IOException e) {
-            log.error("-----> [channel operate failed] after execute the afterHandle method,exception msg =[{}]",e.getMessage(), e);
+            log.error("-----> [channel operate ack failed] after execute the afterHandle method,exception msg =[{}]",e.getMessage(), e);
+        }
+    }
+
+    /**
+     * reject
+     * */
+    protected void reject(Message message,Channel channel,boolean requeue){
+        try {
+            // ack消息
+            channel.basicReject(message.getMessageProperties().getDeliveryTag(),requeue);
+        } catch (IOException e) {
+            log.error("-----> [channel operate reject failed] after execute the afterHandle method,exception msg =[{}]",e.getMessage(), e);
+        }
+    }
+
+    /**
+     * nack
+     * */
+    protected void nack(Message message,Channel channel){
+        try {
+            // ack消息
+            channel.basicNack(message.getMessageProperties().getDeliveryTag(),false,false);
+        } catch (IOException e) {
+            log.error("-----> [channel operate nack failed] after execute the afterHandle method,exception msg =[{}]",e.getMessage(), e);
         }
     }
 

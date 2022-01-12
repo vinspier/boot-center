@@ -27,4 +27,16 @@ public class MsgBizImplTest {
         msgBiz.normalMsg(msgDTO);
     }
 
+    @Test
+    public void delayMsg() {
+        MsgDTO msgDTO = MsgDTO.builder()
+                .event(MsgEventEnum.CREATE.getEvent())
+                .desc(MsgEventEnum.CREATE.getDesc())
+                .content("延时消息内容")
+                .external("")
+                .build();
+
+        msgBiz.delayMsg(msgDTO,30);
+    }
+
 }

@@ -8,6 +8,6 @@ import java.util.concurrent.Callable;
 
 public interface MsgHandler {
 
-   <T,V> V handle(Message message, Channel channel, Class<T> clazz, Callable<V> callable);
+   <T,V> V handle(Message message, Channel channel, Callable<V> callable);
 
 }
