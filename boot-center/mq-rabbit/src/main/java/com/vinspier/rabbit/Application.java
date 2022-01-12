@@ -11,7 +11,7 @@ public class Application {
 
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(Application.class, args);
-        log.info("=====> application start succeed and env configuration are: [{}]", context.getEnvironment());
+        log.info("=====> [application start succeed and env configuration are]: [{}]", context.getEnvironment());
     }
 
 }
