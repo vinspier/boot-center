@@ -63,7 +63,7 @@ public abstract class MsgAbstractHandler implements MsgHandler {
      * 前置处理
      * */
     protected <T> void preHandle(T dto){
-        log.info("--------> [pre handle msg] received msg content =[{}]", JSONObject.toJSONString(dto));
+        log.info("--------> [pre handle msg] received msg content =[{}],threadId=[{}]", JSONObject.toJSONString(dto),Thread.currentThread().getId());
     }
 
     /**

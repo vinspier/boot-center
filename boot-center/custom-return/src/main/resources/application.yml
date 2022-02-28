@@ -14,5 +14,10 @@ mybatis:
   type-aliases-package: com.vinspier.template.pojo
   mapper-locations: classpath:com/vinspier/customize/template/mapper/*.xml
 
+# 公共业务配置
+common:
+  biz:
+    test-code: 123
+
 
 

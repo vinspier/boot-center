@@ -32,6 +32,8 @@ public interface MsgConstant {
 
     String DEAD_QUEUE = "dead_queue";
 
+    String ANNOTATION_QUEUE = "annotation_queue";
+
     /**
      * 路由
      * */
@@ -40,5 +42,7 @@ public interface MsgConstant {
     String DELAY_EVENT = "delay_event";
 
     String DEAD_EVENT = "dead_event";
+
+    String ANNOTATION_EVENT = "annotation_event";
 
 }

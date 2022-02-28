@@ -32,7 +32,7 @@ public class GoodsSearchImpl implements GoodsSearch {
     public List<GoodsDoc> queryList(GoodsParam param) {
         Criteria root = new Criteria();
         if (StringUtils.hasText(param.getName())){
-            root.and(new Criteria(GoodsDoc.NAME).matches(param.getName()));
+            root.and(new Criteria(GoodsDoc.TITLE).matches(param.getName()));
         }
         if (Objects.nonNull(param.getStockType())){
             root.and(new Criteria(GoodsDoc.TYPE).is(param.getStockType()));

@@ -23,7 +23,7 @@ public class GoodsConvert {
     public static GoodsDoc convertPOtoDoc(Goods goods){
         GoodsDoc goodsDoc = new GoodsDoc();
         goodsDoc.setId(goods.getId());
-        goodsDoc.setName(goods.getGoodTitle());
+        goodsDoc.setTitle(goods.getGoodTitle());
         parseCategoryPath(goods.getCategoryPath(),goodsDoc);
         goodsDoc.setStockType(goods.getStockType());
         goodsDoc.setArTranslate(1);

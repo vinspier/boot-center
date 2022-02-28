@@ -1,12 +1,16 @@
 package com.vinspier.rabbit.listener;
 
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
 import com.vinspier.rabbit.constant.MsgConstant;
 import com.vinspier.rabbit.listener.handler.MsgAbstractHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.annotation.Exchange;
+import org.springframework.amqp.rabbit.annotation.Queue;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -92,6 +96,24 @@ public class MsgListen extends MsgAbstractHandler {
             // 策略一：死信队列情况下 允许重回队列
             reject(message,channel,true);
         }
+    }
+
+    /**
+     * 注解式配置 队列 + 消息
+     * */
+    @RabbitListener(bindings = {
+            @QueueBinding(
+                    exchange = @Exchange(value = MsgConstant.VINSPIER_EXCHANGE, type = "topic"),
+                    value = @Queue(MsgConstant.ANNOTATION_QUEUE),
+                    key = MsgConstant.ANNOTATION_EVENT
+            )
+    }, concurrency = "1-1")
+    public void listen(Message message, Channel channel) {
+        handle(message,channel,() -> {
+            log.info("client annotation config consumer  业务实际处理逻辑块");
+            return Boolean.TRUE;
+        });
+        ack(message,channel);
     }
 
 }
