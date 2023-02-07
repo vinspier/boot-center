@@ -1,4 +1,4 @@
-package com.vinspier.plus.dal.dao;
+package com.vinspier.plus.dal.support;
 
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import lombok.Data;
