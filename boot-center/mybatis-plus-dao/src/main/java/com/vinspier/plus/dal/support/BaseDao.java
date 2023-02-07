@@ -1,4 +1,4 @@
-package com.vinspier.plus.dal.dao;
+package com.vinspier.plus.dal.support;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -52,7 +52,7 @@ public interface BaseDao<O,I extends BaseParam<O>> extends IService<O> {
      * @param : multiply query conditions make sure that there's only one data existing in db
      * */
     default O getOne(I param) {
-        QueryWrapper<O> wrapper = buildBasicQueryWrapper(param);
+        QueryWrapper<O> wrapper = buildQueryWrapper(param);
         applyOrderCondition(wrapper,param);
         wrapper.last(LIMIT_ONE_CONDITION);
         return getOne(wrapper);
@@ -63,7 +63,7 @@ public interface BaseDao<O,I extends BaseParam<O>> extends IService<O> {
      * 列表查询
      * */
     default List<O> queryList(I param) {
-        QueryWrapper<O> wrapper = buildBasicQueryWrapper(param);
+        QueryWrapper<O> wrapper = buildQueryWrapper(param);
         applyOrderCondition(wrapper,param);
         return list(wrapper);
     }
@@ -133,7 +133,7 @@ public interface BaseDao<O,I extends BaseParam<O>> extends IService<O> {
      * 分页查询
      * */
     default Page<O> queryPage(I param,int pageIndex,int pageSize) {
-        QueryWrapper<O> wrapper = buildBasicQueryWrapper(param);
+        QueryWrapper<O> wrapper = buildQueryWrapper(param);
         applyOrderCondition(wrapper,param);
         return this.queryPage(pageIndex,pageSize,wrapper);
     }
@@ -161,7 +161,7 @@ public interface BaseDao<O,I extends BaseParam<O>> extends IService<O> {
      * 统计数量
      * */
     default long count(I param) {
-        QueryWrapper<O> wrapper = buildBasicQueryWrapper(param);
+        QueryWrapper<O> wrapper = buildQueryWrapper(param);
         applyOrderCondition(wrapper,param);
         return count(wrapper);
     }
@@ -207,7 +207,7 @@ public interface BaseDao<O,I extends BaseParam<O>> extends IService<O> {
      * 多条件删除
      * */
     default boolean remove(I param){
-        QueryWrapper<O> wrapper = buildBasicQueryWrapper(param);
+        QueryWrapper<O> wrapper = buildQueryWrapper(param);
         return remove(wrapper);
     }
 
@@ -237,6 +237,14 @@ public interface BaseDao<O,I extends BaseParam<O>> extends IService<O> {
         wrapper.ge(Objects.nonNull(param.getCreatedAtStart()),CREATED_AT_COLUMN,param.getCreatedAtStart());
         wrapper.le(Objects.nonNull(param.getCreatedAtEnd()),CREATED_AT_COLUMN,param.getCreatedAtEnd());
         return wrapper;
+    }
+
+    /**
+     * 构建查询wrapper
+     */
+    default QueryWrapper<O> buildQueryWrapper(I param) {
+
+        return buildBasicQueryWrapper(param);
     }
 
     /**
