@@ -30,6 +30,8 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
     public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
         System.out.println("执行【BeanFactoryPostProcessor】 的 实现类 postProcessBeanFactory 方法 ========> 操作BeanDefinition");
         BeanDefinition definition = configurableListableBeanFactory.getBeanDefinition("person");
+        System.out.printf("age:%s",definition.getPropertyValues().getPropertyValue("age").getValue());
+        System.out.println();
         // 后置处理器 修改属性
         definition.getPropertyValues().add("age",1000);
     }

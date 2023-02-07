@@ -9,20 +9,24 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bean-life-cycle</artifactId>
-    <description>bean的生命周期</description>
+    <groupId>com.vinspier.plus.dao</groupId>
+    <artifactId>mybatis-plus-dao</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
 
     <dependencies>
 
         <dependency>
-            <groupId>com.vinspier.springboot</groupId>
-            <artifactId>vinspier-common</artifactId>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>com.vinspier.springboot</groupId>
+            <artifactId>vinspier-common</artifactId>
         </dependency>
 
     </dependencies>
