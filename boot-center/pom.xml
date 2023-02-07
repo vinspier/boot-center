@@ -11,6 +11,7 @@
         <module>mybatis-generate</module>
         <module>mq-rabbit</module>
         <module>vinspier-common</module>
+        <module>mybatis-plus-dao</module>
     </modules>
 
     <parent>
@@ -41,7 +42,7 @@
         <knife4j-spring>1.9.6</knife4j-spring>
         <google-guava>26.0-jre</google-guava>
         <swagger.annotations.version>1.5.13</swagger.annotations.version>
-        <mybatis.plus.boot.starter.version>3.4.0</mybatis.plus.boot.starter.version>
+        <mybatis.plus.boot.starter.version>3.4.3.4</mybatis.plus.boot.starter.version>
 
     </properties>
 

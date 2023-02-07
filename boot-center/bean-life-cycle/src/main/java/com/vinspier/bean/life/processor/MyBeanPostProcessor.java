@@ -27,7 +27,9 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         System.out.println("执行【BeanPostProcessor】 的 实现类 postProcessBeforeInitialization 方法 ====> bean初始化的前置操作");
         ((Person) bean).setAge(2000);
-        System.out.println("        " + beanName + "：" + JSONObject.toJSONString(bean));
+//        System.out.println("        " + beanName + "：" + JSONObject.toJSONString(bean));
+//        System.out.printf("name:%s age:%s%n",((Person) bean).getName(),((Person) bean).getAge());
+        System.out.println(((Person) bean));
         return bean;
     }
 
@@ -38,7 +40,9 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         System.out.println("执行【BeanPostProcessor】 的 实现类 postProcessAfterInitialization 方法 ====> bean初始化的后置操作");
         ((Person) bean).setAge(5000);
-        System.out.println("        " + beanName + "：" + JSONObject.toJSONString(bean));
+//        System.out.println("        " + beanName + "：" + JSONObject.toJSONString(bean));
+//        System.out.printf("name:%s age:%s%n",((Person) bean).getName(),((Person) bean).getAge());
+        System.out.println(((Person) bean));
         return bean;
     }
 }

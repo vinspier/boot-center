@@ -1,5 +1,6 @@
 package com.vinspier.bean.life.processor;
 
+import com.vinspier.bean.life.domain.Person;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
@@ -39,7 +40,10 @@ public class MyInstantiationAwareBeanPostProcessor extends InstantiationAwareBea
     @Override
     public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
         System.out.println("执行【InstantiationAwareBeanPostProcessor】的 postProcessAfterInstantiation 方法  ========> 执行实例化后置操作");
-        return super.postProcessAfterInstantiation(bean, beanName);
+        boolean result = super.postProcessAfterInstantiation(bean, beanName);
+        System.out.printf("age:%s",((Person)bean).getAge());
+        System.out.println();
+        return result;
     }
 
     /**
@@ -48,6 +52,11 @@ public class MyInstantiationAwareBeanPostProcessor extends InstantiationAwareBea
     @Override
     public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {
         System.out.println("执行【InstantiationAwareBeanPostProcessor】 的 实现类 postProcessProperties 方法 设置属性");
-        return super.postProcessProperties(pvs, bean, beanName);
+        System.out.printf("age:%s",pvs.getPropertyValue("age").getValue());
+        System.out.println();
+        PropertyValues propertyValues = super.postProcessProperties(pvs, bean, beanName);
+        System.out.printf("age:%s",pvs.getPropertyValue("age").getValue());
+        System.out.println();
+        return propertyValues;
     }
 }

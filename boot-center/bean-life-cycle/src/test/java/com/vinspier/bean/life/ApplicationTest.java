@@ -2,14 +2,10 @@ package com.vinspier.bean.life;
 
 import com.alibaba.fastjson.JSONObject;
 import com.vinspier.bean.life.domain.Person;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 public class ApplicationTest {
 
@@ -19,7 +15,8 @@ public class ApplicationTest {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         System.out.println("初始化容器结束");
         Person person = context.getBean(Person.class);
-        System.out.println("使用数据：" + JSONObject.toJSONString(person));
+//        System.out.println("使用数据：" + JSONObject.toJSONString(person));
+        System.out.println(person.toString());
         System.out.println("开始关闭容器");
         context.registerShutdownHook();
 

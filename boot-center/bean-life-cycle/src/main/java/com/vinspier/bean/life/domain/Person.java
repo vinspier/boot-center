@@ -3,6 +3,8 @@ package com.vinspier.bean.life.domain;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -14,7 +16,7 @@ import javax.annotation.PreDestroy;
  * @date    11:19 上午
  * @version 1.0
 */
-public class Person implements BeanFactoryAware, BeanNameAware, InitializingBean , DisposableBean {
+public class Person implements ApplicationContextAware,BeanFactoryAware,BeanClassLoaderAware, BeanNameAware, InitializingBean , DisposableBean {
 
     private String name;
 
@@ -23,6 +25,10 @@ public class Person implements BeanFactoryAware, BeanNameAware, InitializingBean
     private BeanFactory beanFactory;
 
     private String beanName;
+
+    private ClassLoader classLoader;
+
+    private ApplicationContext applicationContext;
 
     public Person() {
         System.out.println("执行【实例对像的】无参构造器  ====> 实例化");
@@ -89,6 +95,16 @@ public class Person implements BeanFactoryAware, BeanNameAware, InitializingBean
         this.beanName = beanName;
     }
 
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
+
+    @Override
+    public void setBeanClassLoader(ClassLoader classLoader) {
+        this.classLoader = classLoader;
+    }
+
     /**
      * InitializingBean 接口方法
      */
@@ -98,7 +114,8 @@ public class Person implements BeanFactoryAware, BeanNameAware, InitializingBean
         // ---- 通过工厂 拿到对应的bean 对其做相应的逻辑操作
         Person person = beanFactory.getBean(Person.class);
         person.setAge(3000);
-        System.out.println("        " + JSONObject.toJSONString(person));
+//        System.out.println("        " + JSONObject.toJSONString(person));
+        System.out.println(person.toString());
     }
 
     /**
