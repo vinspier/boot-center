@@ -184,6 +184,7 @@ public interface BaseDao<O,I extends BaseParam<O>> extends IService<O> {
             throw new RuntimeException(String.format("updates data is forbidden while missing where limit condition, param body = [%s]",JSONObject.toJSONString(param)));
         }
         UpdateWrapper<O> wrapper = buildUpdateWrapper(param);
+
         return update(wrapper);
     }
 

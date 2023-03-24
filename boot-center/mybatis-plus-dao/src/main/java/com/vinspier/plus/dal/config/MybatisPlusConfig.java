@@ -50,6 +50,11 @@ public class MybatisPlusConfig {
     public MetaObjectHandler customizeMetaObjectHandler() {
         return new MetaObjectHandler() {
 
+            /**
+             * strictInsertFill
+             * strictUpdateFill
+             * 会判断原来是否有值,若有 则不填充
+             * */
             // insert operation
             @Override
             public void insertFill(MetaObject metaObject) {
@@ -59,13 +64,17 @@ public class MybatisPlusConfig {
                 }
                 if (originalTimeClassType.isAssignableFrom(LocalDateTime.class)) {
                     // 起始版本 3.3.3(推荐)
-                    this.strictInsertFill(metaObject, CREATED_TIME_FIELD, LocalDateTime::now, LocalDateTime.class);
-                    this.strictInsertFill(metaObject, UPDATE_TIME_FIELD, LocalDateTime::now, LocalDateTime.class);
+//                    this.strictInsertFill(metaObject, CREATED_TIME_FIELD, LocalDateTime::now, LocalDateTime.class);
+//                    this.strictInsertFill(metaObject, UPDATE_TIME_FIELD, LocalDateTime::now, LocalDateTime.class);
+                    this.setFieldValByName( CREATED_TIME_FIELD, LocalDateTime.now(), metaObject);
+                    this.setFieldValByName( UPDATE_TIME_FIELD, LocalDateTime.now(), metaObject);
                 }
                 if (originalTimeClassType.isAssignableFrom(Date.class)) {
                     // 起始版本 3.3.3(推荐)
-                    this.strictInsertFill(metaObject, CREATED_TIME_FIELD, Date::new, Date.class);
-                    this.strictInsertFill(metaObject, UPDATE_TIME_FIELD, Date::new, Date.class);
+//                    this.strictInsertFill(metaObject, CREATED_TIME_FIELD, Date::new, Date.class);
+//                    this.strictInsertFill(metaObject, UPDATE_TIME_FIELD, Date::new, Date.class);
+                    this.setFieldValByName(CREATED_TIME_FIELD, new Date(), metaObject);
+                    this.setFieldValByName(UPDATE_TIME_FIELD, new Date(), metaObject);
                 }
             }
 
@@ -78,11 +87,13 @@ public class MybatisPlusConfig {
                 }
                 if (originalTimeClassType.isAssignableFrom(LocalDateTime.class)) {
                     // 起始版本 3.3.3(推荐)
-                    this.strictUpdateFill(metaObject, UPDATE_TIME_FIELD, LocalDateTime::now, LocalDateTime.class);
+//                    this.strictUpdateFill(metaObject, UPDATE_TIME_FIELD, LocalDateTime::now, LocalDateTime.class);
+                    this.setFieldValByName( UPDATE_TIME_FIELD, LocalDateTime.now(), metaObject);
                 }
                 if (originalTimeClassType.isAssignableFrom(Date.class)) {
                     // 起始版本 3.3.3(推荐)
-                    this.strictUpdateFill(metaObject, UPDATE_TIME_FIELD, Date::new, Date.class);
+//                    this.strictUpdateFill(metaObject, UPDATE_TIME_FIELD, Date::new, Date.class);
+                    this.setFieldValByName( UPDATE_TIME_FIELD, new Date(), metaObject);
                 }
             }
 
